@@ -27,9 +27,6 @@ const createTodo = () => {
 
   //reset the form fields
   resetForm();
-
-  //read to generate the list of tasks
-  readTodoList();
 };
 
 const saveTodo = (todo) => {
@@ -60,9 +57,11 @@ const readTodoList = () => {
   const todoList = document.querySelector(".todo-list");
   const listData = JSON.parse(localStorage.getItem("todoList"));
 
-  const list = listData
-    .map((data) => {
-      return `<div class="col-sm-12 todo-abt">
+  const list =
+    listData &&
+    listData
+      .map((data) => {
+        return `<div class="col-sm-12 todo-abt">
        <div class="mb-3">
          <h5 class="title">${data.title}</h5>
          <p class="description">${data.about}</p>
@@ -77,8 +76,8 @@ const readTodoList = () => {
        </div>
      </div>
        `;
-    })
-    .join("");
+      })
+      .join("");
 
   //   console.log(listData);
 
@@ -95,6 +94,8 @@ const readTodoList = () => {
 
   return todoList;
 };
+//read to generate the list of tasks
 readTodoList();
+// readTodoList();
 
 //update the todolist
