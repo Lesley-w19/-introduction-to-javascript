@@ -3,11 +3,28 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-image: url("https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.todo-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+}
 .header {
   text-align: center;
   text-transform: capitalize;
 }
-.hide {
+.hide,
+.hidebtn {
   display: none;
 }
 .font-italic {
@@ -32,9 +49,31 @@
   align-items: center;
 }
 .list-wrapper {
-  margin: 20px 30px;
+  max-height: 50vh;
+  overflow: scroll;
+  margin: 20px auto;
   padding: 50px 60px;
-  background-color: aqua;
+  /* background-color: rebeccapurple; */
+  position: relative;
+  border: 2px solid rgb(221, 214, 227);
+  border-radius: 10px;
+}
+.todo-list {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 30px auto;
+}
+.form-label {
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: aliceblue;
+}
+.todo-err h6 {
+  text-align: center;
+  font-weight: bold;
+  color: brown;
 }
 .todo-abt .btn:hover {
   outline: none;
