@@ -133,6 +133,8 @@ const updateTodo = (id) => {
     };
     console.log(updatedTodo);
 
+    saveTodo(updatedTodo);
+
     //show the update button
     document.querySelector(".btn-add").classList.remove("hidebtn");
     document.querySelector(".btn-update").classList.add("hidebtn");
