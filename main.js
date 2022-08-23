@@ -61,16 +61,16 @@ const readTodoList = () => {
     listData &&
     listData
       .map((data) => {
-        return `<div class="col-sm-12 todo-abt" id=${data.id}>
+        return `<div class="col-sm-12 todo-abt mb-3" id=${data.id}>
        <div class="mb-3" >
-         <h5 class="title text-light">${data.title}</h5>
+         <h5 class="title">${data.title}</h5>
          <p class="description">${data.about}</p>
        </div>
        <div>
-         <button class="btn btn-edit text-primary" id="btnEdit" >
+         <button class="btn btn-edit text-primary" id="btnEdit" onclick="editTodo(this)" >
            <i class="fa fa-pencil-square" aria-hidden="true"></i>
          </button>
-         <button class="btn text-danger btnDelete" >
+         <button class="btn text-danger btnDelete" onclick="deleteTodo(this)" >
            <i class="fa fa-trash" aria-hidden="true"></i>
          </button>
        </div>
@@ -82,7 +82,7 @@ const readTodoList = () => {
   // console.log(listData);
 
   if (listData && listData.length >= 1) {
-    todoList.innerHTML += list;
+    todoList.innerHTML = list;
   } else {
     todoList.innerHTML += `<div class="col-sm-12 todo-abt  mt-2 text-center">
   <div class="mb-3  todo-err">
@@ -99,48 +99,47 @@ const readTodoList = () => {
 readTodoList();
 
 //update the todolist
-if (listData.length > 0) {
-  const btnEdit = document.getElementById("btnEdit");
-
-  btnEdit.addEventListener("click", (e) => {
-    e.preventDefault();
-    const task_id = e.currentTarget.parentNode.parentNode.getAttribute("id");
-
-    //find the task that matches the id
-    const taskData = listData.find((tasks) => {
-      // console.log(tasks.id);
-      return tasks.id === task_id;
-    });
-    // console.log(taskData);
-
-    //add the information to be edited to the form fields
-    document.querySelector(".todo-title").value = taskData.title;
-    document.querySelector(".todo-about").value = taskData.about;
-
-    //show the update button
-    document.querySelector(".btn-add").classList.add("hidebtn");
-    document.querySelector(".btn-update").classList.remove("hidebtn");
-
-    //call the update function
-    updateTodo(task_id);
+const editTodo = (e) => {
+  const task_id = e.parentNode.parentNode.getAttribute("id");
+  //find the task that matches the id
+  const taskData = listData.find((tasks) => {
+    // console.log(tasks.id);
+    return tasks.id === task_id;
   });
-}
+  // console.log(taskData);
+
+  //add the information to be edited to the form fields
+  document.querySelector(".todo-title").value = taskData.title;
+  document.querySelector(".todo-about").value = taskData.about;
+
+  //show the update button
+  document.querySelector(".btn-add").classList.add("hidebtn");
+  document.querySelector(".btn-update").classList.remove("hidebtn");
+
+  //call the update function
+  updateTodo(task_id);
+};
 
 //update the task data
 const updateTodo = (id) => {
   const btnUpdate = document.querySelector(".btn-update");
-  const updated_title = document.querySelector(".todo-title").value;
-  const updated_about = document.querySelector(".todo-about").value;
-  const updatedTodo = {
-    id,
-    updated_title,
-    updated_about,
-  };
-  btnUpdate.addEventListener("click", (e) => {
-    e.preventDefault();
+  //delete the todo
+  deleteTodo(id);
+  btnUpdate.addEventListener("click", () => {
+    const updatedTodo = {
+      id: id,
+      title: document.querySelector(".todo-title").value,
+      about: document.querySelector(".todo-about").value,
+    };
     console.log(updatedTodo);
-    saveTodo(updatedTodo);
+
+    //show the update button
+    document.querySelector(".btn-add").classList.remove("hidebtn");
+    document.querySelector(".btn-update").classList.add("hidebtn");
   });
+
+  // saveTodo
+  //saveTodo()
 };
 
 // sync task
@@ -151,7 +150,7 @@ const syncTask = () => {
 
 // delete function
 const deleteTodo = (event) => {
-  const deleteData = event.currentTarget.parentNode.parentNode;
+  const deleteData = event.parentNode.parentNode;
   const task_id = deleteData.getAttribute("id");
   todoList.removeChild(deleteData);
   listData.forEach((lstData, i) => {
@@ -164,5 +163,3 @@ const deleteTodo = (event) => {
 };
 
 // remove the task data
-const btnDelete = document.querySelector(".btnDelete");
-btnDelete.addEventListener("click", (e) => deleteTodo(e));

@@ -67,3 +67,81 @@ btnEdit.addEventListener("click", (e) => {
       // saveTodo(updatedTodo);
     });
   };
+
+
+
+
+
+
+  ////////////////
+  let todoList = document.querySelector(".todo-list");
+
+class Todo {
+  constructor(name, about) {
+    this.name = name;
+    this.about = about;
+  }
+}
+const todoData = [];
+
+// creating the new todoitem
+const createTodo = () => {
+  const title = document.querySelector(".todo-title").value;
+  const about = document.querySelector(".todo-about").value;
+  const todoItem = new Todo(title, about);
+  const todo = {
+    id: Math.random().toString(36).substring(2, 15),
+    title: todoItem.name,
+    about: todoItem.about,
+  };
+  todoData.push(todo);
+  //   console.log(todoData);
+
+  //reset the form fields
+  resetForm();
+
+  //read the list and map
+  readTodoList();
+};
+
+// function reset form
+const resetForm = () => {
+  document.querySelector(".todo-title").value = "";
+  document.querySelector(".todo-about").value = "";
+};
+
+// read the todoList
+const readTodoList = () => {
+  const list =
+    todoData &&
+    todoData
+      .map((data) => {
+        return `<div class="col-sm-12 todo-abt" id=${data.id}>
+       <div class="mb-3" >
+         <h5 class="title text-light">${data.title}</h5>
+         <p class="description">${data.about}</p>
+       </div>
+       <div>
+         <button class="btn btn-edit text-primary" id="btnEdit" onclick="editTodo(this)">
+           <i class="fa fa-pencil-square" aria-hidden="true"></i>
+         </button>
+         <button class="btn text-danger btnDelete" >
+           <i class="fa fa-trash" aria-hidden="true"></i>
+         </button>
+       </div>
+     </div>
+       `;
+      })
+      .join("");
+
+  // console.log(listData);
+  todoList.innerHTML = list;
+
+  return todoList;
+};
+
+//update the todo list
+const editTodo = (e) => {
+  const todoId = e.parentElement.parentElement;
+  console.log(todoId);
+};

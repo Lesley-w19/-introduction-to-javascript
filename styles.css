@@ -4,9 +4,18 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url("https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(137, 133, 132, 0.578)
+    ),
+    url("https://images.pexels.com/photos/7150986/pexels-photo-7150986.jpeg");
   background-repeat: no-repeat;
-  /* background-size: cover; */
+  background-size: cover;
+  min-height: 100vh;
+}
+.add-div {
+  padding: 10px 20px;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(18px);
@@ -19,9 +28,32 @@ body {
   align-items: center;
   flex-direction: column-reverse;
 }
+.todo-abt {
+  background-color: aliceblue;
+  padding: 10px 20px;
+}
+.todo-abt h5 {
+  color: black;
+}
+.todo-abt p {
+  letter-spacing: 1px;
+}
 .header {
   text-align: center;
   text-transform: capitalize;
+  background-color: rgba(255, 166, 0, 0.67);
+}
+.header::after {
+  content: "";
+  display: block;
+  height: 1vh;
+  background-color: orange;
+}
+.header h1 {
+  color: azure;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 .hide,
 .hidebtn {
@@ -32,12 +64,16 @@ body {
   font-weight: 300;
 }
 .todo-div {
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
+}
+.text-title {
+  color: aliceblue;
+  font-weight: bold;
 }
 .btn-add {
   padding: 8px 26px;
@@ -49,17 +85,15 @@ body {
   align-items: center;
 }
 .list-wrapper {
-  max-height: 50vh;
+  max-height: 90vh;
   overflow: scroll;
   margin: 20px auto;
   padding: 50px 60px;
   /* background-color: rebeccapurple; */
   position: relative;
-  border: 2px solid rgb(221, 214, 227);
   border-radius: 10px;
 }
 .todo-list {
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
